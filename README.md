@@ -6,6 +6,12 @@ Apache Guacamole (incubating) is a clientless remote desktop gateway. It support
 
 It supports RDP, SSH, Telnet and VNC and is the fastest HTML5 gateway I know. Checkout the projects [homepage](https://guacamole.incubator.apache.org/) for more information.
 
+## Optionnal
+If you need to create public and private key on your home directoryk
+~~~bash
+ssh-keygen
+~~~
+
 ## Prerequisites
 You need a working **docker** installation and **docker compose** running on your machine.
 
@@ -13,7 +19,7 @@ You need a working **docker** installation and **docker compose** running on you
 Clone the GIT repository and start guacamole:
 
 ~~~bash
-git clone "https://github.com/boschkundendienst/guacamole-docker-compose.git"
+git clone "https://github.com/rkajy/guacamole-docker-compose-debian-xfce.git"
 cd guacamole-docker-compose
 ./prepare.sh
 docker compose up -d
@@ -143,9 +149,6 @@ by nginx for https.
 ## reset.sh
 To reset everything to the beginning, just run `./reset.sh`.
 
-## WOL
-
-Wake on LAN (WOL) does not work and I will not fix that because it is beyound the scope of this repo. But [zukkie777](https://github.com/zukkie777) who also filed [this issue](https://github.com/boschkundendienst/guacamole-docker-compose/issues/12) fixed it. You can read about it on the [Guacamole mailing list](http://apache-guacamole-general-user-mailing-list.2363388.n4.nabble.com/How-to-docker-composer-for-WOL-td9164.html)
 
 **Disclaimer**
 
