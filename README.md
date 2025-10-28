@@ -9,20 +9,25 @@ Apache Guacamole is a clientless remote desktop gateway. It supports standard pr
 
 See the [official project homepage](https://guacamole.incubator.apache.org/) for more information.
 
-## Optional
-
-To create an SSH key pair in your home directory:
-
-```bash
-ssh-keygen
-```
-
 ## Prerequisites
 
 You need a working installation of:
 
 - Docker
 - Docker Compose
+
+## Set up SSH connection in your virtual machine
+```bash
+sudo apt update
+sudo apt install -y openssh-server
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+Connet from your host machine
+```bash
+ssh <username>@<IP_VM>
+```
+
 
 ## Quick Start
 
@@ -47,7 +52,7 @@ This section explains how to configure a VNC server inside your Debian/Ubuntu ma
 
 ```bash
 sudo apt update
-sudo apt install -y xfce4 xfce4-goodies tightvncserver
+sudo apt install -y xfce4 xfce4-goodies tightvncserver dbus-x11 x11-xserver-utils
 ```
 
 ### 2. Set VNC Password
@@ -78,8 +83,12 @@ Replace content with:
 
 ```bash
 #!/bin/bash
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+export XKL_XMODMAP_DISABLE=1
+export DISPLAY=:1
 xrdb $HOME/.Xresources
-startxfce4 &
+dbus-launch startxfce4 &
 ```
 
 Then:
@@ -110,6 +119,7 @@ chmod +x ~/start-vnc.sh
 ```
 
 ### 6. Verify the Server is Running
+Option 1:
 
 ```bash
 ps aux | grep Xtightvnc
@@ -117,11 +127,36 @@ ps aux | grep Xtightvnc
 vncserver -list
 ```
 
+Option 2:
+
+```bash
+ss -tlnp | grep 590
+```
+
+Then:
+
+you should have this line:
+
+```bash
+LISTEN 0 5 0.0.0.0:5901...
+```
+
+To see VNC's log:
+
+```bash
+cat ~/.vnc/$(hostname):1.log
+```
 ### 7. Open Required Ports in Firewall / AWS Security Group
 
 - **5901** (VNC)
 - **8080** (Guacamole)
 - **22** (SSH)
+
+if needed because you got this error message "Connection refused", run:
+
+```bash
+sudo ufw allow 5901/tcp
+```
 
 ⚠️ Never expose port 5901 publicly without a firewall or SSH tunneling.
 
@@ -129,9 +164,27 @@ vncserver -list
 
 In Guacamole, create a connection using:
 
+**EDIT CONNECTION**:
+
+- **Name**: Debian GUI
+- **Location**:ROOT
 - **Protocol**: VNC
-- **Hostname**: `<your-EC2-IP>:5901`
-- **Password**: The VNC password you set
+
+**PARAMETERS**:
+
+Network:
+
+- **Hostname**: `<your-EC2-IP>`
+- **Port**: 5901
+
+Authentification:
+
+- **Username**: (empty)
+- **Password**: `<The VNC password you set>`
+
+**CLIPBOARD**
+
+Encoding: UTF-8
 
 📏 Recommended screen resolution: `1920x1080` or `1600x900`
 
