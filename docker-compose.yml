@@ -148,7 +148,7 @@ services:
 ## enable next line if not using nginx
 ##    - 8080:8080/tcp # Guacamole is on :8080/guacamole, not /.
 ## enable next line when using nginx
-    - 8080/tcp
+    - "8081:8080/tcp" # 8081 on the VM -> 8080 inside the container
     restart: always
 
 ########### optional ##############
