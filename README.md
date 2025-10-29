@@ -20,32 +20,6 @@ You need a working installation of:
 
 In your Virtualbox network setting, follow this:
 
-### Option 1:
-
-<img width="655" height="340" alt="image" src="https://github.com/user-attachments/assets/9cdc5ac9-ae94-4471-9866-40cdc7cf9898" />
-
-- Go to Adapter 1
-- Enable Network Adapter
-- Attached to: Bridged Adapter
-- Name: en0 Ethernet
-- Press OK
-
-### Option 2:
-
-- Shut down the VM
-- Go to Settings -> Network -> Adapter 1
-- Put NAT on Attached to:
-- Then click Advanced -> Port Fowarding
-
-- Add those rules:
-<img width="819" height="171" alt="image" src="https://github.com/user-attachments/assets/33bf7113-e6a2-4136-8e7c-2d4cc9ea2c65" />
-
-- Then connect with, randandri is the username
-
-```bash
-ssh radandri@127.0.0.1 -p 4242
-```
-
 Install:
 
 ```bash
@@ -85,6 +59,34 @@ ssh <username>@<IP_VM>
 ### To check your VM's IP adress
 ```bash
 ip a | grep inet
+```
+
+Your IP_VM is localhost if you followed option 2.
+
+### Option 1:
+
+<img width="655" height="340" alt="image" src="https://github.com/user-attachments/assets/9cdc5ac9-ae94-4471-9866-40cdc7cf9898" />
+
+- Go to Adapter 1
+- Enable Network Adapter
+- Attached to: Bridged Adapter
+- Name: en0 Ethernet
+- Press OK
+
+### Option 2:
+
+- Shut down the VM
+- Go to Settings -> Network -> Adapter 1
+- Put NAT on Attached to:
+- Then click Advanced -> Port Fowarding
+
+- Add those rules:
+<img width="819" height="171" alt="image" src="https://github.com/user-attachments/assets/33bf7113-e6a2-4136-8e7c-2d4cc9ea2c65" />
+
+- Then connect with, randandri is the username
+
+```bash
+ssh radandri@127.0.0.1 -p 4242
 ```
 
 ## Quick Start
