@@ -62,6 +62,10 @@ Connet from your host machine
 ssh <username>@<IP_VM>
 ```
 
+### To check your VM's IP adress
+```bash
+ip a | grep inet
+```
 
 ## Quick Start
 
@@ -236,6 +240,24 @@ Authentification:
 Encoding: UTF-8
 
 📏 Recommended screen resolution: `1920x1080` or `1600x900`
+
+### 9. Remove local graphical interface if you use local VM
+
+- Delete "Display manager" local (GDM,LightDM,etc.)
+- You have to keep XFCE4 because of VNC
+
+Disable graphical environnement:
+
+```bash
+sudo systemctl disable lightdm
+sudo systemctl set-default multi-user.target
+```
+
+Delete heavy and unused packages, be carreful don't delete XFCE4 and dbus-x11 otherwise VNC can't show the GUI
+
+```bash
+sudo apt purge gdm3 lightdm gnome-shell gnome-session* xorg* --auto-remove
+```
 
 ---
 
