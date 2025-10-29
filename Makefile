@@ -136,5 +136,14 @@ clean-docker:
 	bash reset.sh
 	docker-compose down -v --remove-orphans
 	docker system prune -f
-	
-.PHONY: help install up down restart status ssh setup-vnc status-vnc restart-vnc connect env update-env run clean-docker
+
+optimize-vm:
+	@echo "🚀 Nettoyage de la VM (désactivation interface graphique)..."
+	sudo systemctl disable lightdm || true
+	sudo systemctl set-default multi-user.target
+	sudo apt purge -y gdm3 lightdm gnome-shell gnome-session* xorg* --auto-remove || true
+	sudo apt autoremove -y
+	sudo apt autoclean
+	@echo "✅ Interface graphique désactivée et VM optimisée."
+
+.PHONY: help install up down restart status ssh setup-vnc status-vnc restart-vnc connect env update-env run clean-docker optimize-vm
