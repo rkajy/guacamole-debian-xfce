@@ -20,6 +20,8 @@ You need a working installation of:
 
 In your Virtualbox network setting, follow this:
 
+### Option 1:
+
 <img width="655" height="340" alt="image" src="https://github.com/user-attachments/assets/9cdc5ac9-ae94-4471-9866-40cdc7cf9898" />
 
 - Go to Adapter 1
@@ -27,6 +29,26 @@ In your Virtualbox network setting, follow this:
 - Attached to: Bridged Adapter
 - Name: en0 Ethernet
 - Press OK
+
+### Option 2:
+
+- Shut down the VM
+- Go to Settings -> Network -> Adapter 1
+- Put NAT on Attached to:
+- Then click Advanced -> Port Fowarding
+- Add those rules:
+
+  | Nom | Port hôte | Port invité | Protocole |
+|------|------------|-------------|------------|
+| SSH  | 4242       | 22          | TCP        |
+| VNC  | 5901       | 5901        | TCP        |
+| Guacamole | 8081  | 8080        | TCP        |
+
+- Then connect with, randandri is the username
+
+```bash
+ssh radandri@127.0.0.1 -p 4242
+```
 
 Install:
 
