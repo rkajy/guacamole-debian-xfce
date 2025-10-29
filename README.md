@@ -73,7 +73,7 @@ docker compose up -d
 ```
 
 Your Guacamole server will now be available at:  
-📍 `https://<your-server-ip>:8443/`  
+📍 `https://<your-server-ip>:8443/guacamole/#/`  
 🧑 Default credentials: `guacadmin` / `guacadmin`
 
 ---
