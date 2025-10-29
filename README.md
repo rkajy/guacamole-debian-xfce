@@ -39,9 +39,13 @@ In your Virtualbox network setting, follow this:
 - Add those rules:
 
   | Nom | Port hôte | Port invité | Protocole |
+  
 |------|------------|-------------|------------|
+
 | SSH  | 4242       | 22          | TCP        |
+
 | VNC  | 5901       | 5901        | TCP        |
+
 | Guacamole | 8081  | 8080        | TCP        |
 
 - Then connect with, randandri is the username
