@@ -36,17 +36,9 @@ In your Virtualbox network setting, follow this:
 - Go to Settings -> Network -> Adapter 1
 - Put NAT on Attached to:
 - Then click Advanced -> Port Fowarding
+
 - Add those rules:
-
-  | Nom | Port hôte | Port invité | Protocole |
-  
-|------|------------|-------------|------------|
-
-| SSH  | 4242       | 22          | TCP        |
-
-| VNC  | 5901       | 5901        | TCP        |
-
-| Guacamole | 8081  | 8080        | TCP        |
+<img width="819" height="171" alt="image" src="https://github.com/user-attachments/assets/33bf7113-e6a2-4136-8e7c-2d4cc9ea2c65" />
 
 - Then connect with, randandri is the username
 
