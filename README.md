@@ -20,6 +20,8 @@ You need a working installation of:
 
 In your Virtualbox network setting, follow this:
 
+<img width="655" height="340" alt="image" src="https://github.com/user-attachments/assets/9cdc5ac9-ae94-4471-9866-40cdc7cf9898" />
+
 - Go to Adapter 1
 - Enable Network Adapter
 - Attached to: Bridged Adapter
