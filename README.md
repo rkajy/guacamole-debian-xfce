@@ -17,12 +17,46 @@ You need a working installation of:
 - Docker Compose
 
 ## Set up SSH connection in your virtual machine
+
+In your Virtualbox network setting, follow this:
+
+- Go to Adapter 1
+- Enable Network Adapter
+- Attached to: Bridged Adapter
+- Name: en0 Ethernet
+- Press OK
+
+Install:
+
 ```bash
 sudo apt update
 sudo apt install -y openssh-server
 sudo systemctl enable ssh
 sudo systemctl start ssh
 ```
+
+Update this file:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+And:
+
+- Disable root SSH connection: PermitRootLogin no
+- Change default's port: (eg: Port 4242)
+
+- restart service:
+
+```bash
+sudo system restart ssh
+```
+- actual status:
+
+```bash
+sudo systemctl status ssh
+```
+
 Connet from your host machine
 ```bash
 ssh <username>@<IP_VM>
@@ -162,7 +196,22 @@ sudo ufw allow 5901/tcp
 
 ### 8. Connect via Guacamole
 
-In Guacamole, create a connection using:
+From your web browser:
+
+```bash
+http://<VM_IP_ADRESS>:8081/guacamole/#/
+```
+
+In Guacamole, the default login and password is:
+
+```bash
+guacadmin
+guacadmin
+```
+
+Create your own user then delete the user guacadmin
+
+Create a connection using:
 
 **EDIT CONNECTION**:
 
