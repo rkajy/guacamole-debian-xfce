@@ -50,7 +50,7 @@ install:
 
 up:
 	@echo "📦 Démarrage des conteneurs Guacamole..."
-	docker-compose up -d
+	docker compose up -d
 	@echo ""
 	@echo "🌐 Accès Guacamole : http://$(HOST_IP):$(GUAC_PORT)/guacamole"
 	@echo "🧩 Utilisateur par défaut : guacadmin / guacadmin"
@@ -58,7 +58,7 @@ up:
 
 down:
 	@echo "🛑 Arrêt et suppression des conteneurs..."
-	docker-compose down
+	docker compose down
 
 restart: down up
 
@@ -129,13 +129,16 @@ update-env:
 
 # Mets à jour .env puis lance tes conteneurs
 run: update-env
-	docker-compose --env-file $(ENV_FILE) up -d
+	docker compose --env-file $(ENV_FILE) up -d
 
 clean-docker:
 	@echo "🧹 Suppression des conteneurs, volumes et images orphelins..."
 	bash reset.sh
-	docker-compose down -v --remove-orphans
+	docker compose down -v --remove-orphans
 	docker system prune -f
+	docker stop $(docker ps -aq) 2>/dev/null
+	docker rm -f $(docker ps -aq) 2>/dev/null
+
 
 optimize-vm:
 	@echo "🚀 Nettoyage de la VM (désactivation interface graphique)..."
