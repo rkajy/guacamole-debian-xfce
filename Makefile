@@ -43,10 +43,9 @@ help:
 # 🚀 DOCKER / GUACAMOLE
 # ================================
 
-install:
+install-guacamole:
 	bash prepare.sh
 	make up
-	make setup-vnc
 
 up:
 	@echo "📦 Démarrage des conteneurs Guacamole..."
@@ -149,4 +148,4 @@ optimize-vm:
 	sudo apt autoclean
 	@echo "✅ Interface graphique désactivée et VM optimisée."
 
-.PHONY: help install up down restart status ssh setup-vnc status-vnc restart-vnc connect env update-env run clean-docker optimize-vm
+.PHONY: help install-guacamole up down restart status ssh setup-vnc status-vnc restart-vnc connect env update-env run clean-docker optimize-vm
