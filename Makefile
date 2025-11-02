@@ -82,18 +82,24 @@ setup-vnc:
 	mkdir -p ~/.vnc
 	echo '#!/bin/bash' > ~/.vnc/xstartup
 	echo 'xrdb "$$HOME/.Xresources"' >> ~/.vnc/xstartup
+	@echo 'unset SESSION_MANAGER' >> ~/.vnc/xstartup
+	@echo 'unset DBUS_SESSION_BUS_ADDRESS' >> ~/.vnc/xstartup
 	echo 'startxfce4 &' >> ~/.vnc/xstartup
 	chmod +x ~/.vnc/xstartup
 	@echo "✅ Fichier ~/.vnc/xstartup créé."
 	@echo "💡 Lance le serveur avec : make start-vnc"
+	@echo "🔒 Mise en place du mot de passe VNC..."
 	echo "$(VNC_PASS)" | vncpasswd -f > ~/.vnc/passwd
 	chmod 600 ~/.vnc/passwd
 
 status-vnc:
 	ss -tlnp | grep $(VNC_PORT)
+	@echo "📄 Pour suivre les logs du VNC : tail -f ~/.vnc/$$HOSTNAME:1.log"
+	tail -f ~/.vnc/radandri42:1.log
 
 restart-vnc:
-	vncserver -kill :1 2>/dev/null 
+	@echo "🛑 Kill ancien serveur VNC si présent..."
+	vncserver -kill :1 2>/dev/null || true
 	vncserver :1 -geometry 1920x1080 -depth 24
 
 connect:
