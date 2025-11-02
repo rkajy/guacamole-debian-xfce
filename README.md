@@ -220,6 +220,85 @@ sudo ufw allow 5901/tcp
 
 ⚠️ Never expose port 5901 publicly without a firewall or SSH tunneling.
 
+### Auto-Start VNC Server on Boot (Systemd Method)
+
+This guide explains how to automatically start your VNC server every time the VM boots, without having to run make restart-vnc manually.
+
+It uses systemd, the recommended way to manage background services on Debian-based systems.
+
+#### Create the Systemd Service
+
+Run:
+
+```bash
+sudo nano /etc/systemd/system/vnc-autostart.service
+```
+
+Paste the following content:
+
+```bash
+[Unit]
+Description=Auto-start VNC server for user radandri
+After=network.target docker.service
+
+[Service]
+Type=forking
+User=radandri
+WorkingDirectory=/home/radandri/guacamole-debian-xfce
+ExecStart=/usr/bin/make restart-vnc
+ExecStop=/usr/bin/vncserver -kill :1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+#### Enable and Start the Service
+
+Reload systemd and enable the new service to start at boot:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable vnc-autostart.service
+sudo systemctl start vnc-autostart.service
+```
+
+#### Verify the Service Status
+
+Check that the service is active and running correctly:
+
+```bash
+systemctl status vnc-autostart.service
+```
+
+#### Usefull commands, for debug:
+
+Start the service manually
+```bash
+sudo systemctl start vnc-autostart
+```
+
+Stop the service
+```bash
+sudo systemctl stop vnc-autostart
+```
+
+Restart the service
+```bash
+sudo systemctl restart vnc-autostart
+```
+
+Check the current status
+```bash
+systemctl status vnc-autostart
+```
+
+View live logs
+```bash
+sudo journalctl -u vnc-autostart -f
+```
+
 ### 8. Connect via Guacamole
 
 From your web browser:
