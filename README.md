@@ -1,6 +1,9 @@
 
 # Guacamole with Docker Compose
 
+[Screencast from 11-30-2025 06:40:56 PM.webm](https://github.com/user-attachments/assets/1a5c24c3-7e07-46cb-8fdf-0ee61dc354f1)
+
+
 This is a small documentation on how to run a fully working **Apache Guacamole** instance with Docker Compose. The goal of this project is to make it easy to test and deploy Guacamole.
 
 ## About Guacamole
